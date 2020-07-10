@@ -39,17 +39,16 @@
 					</p>
 				</section>
 			</section>
+			
 			<section>
 				<h4>The Project in One Sentence:</h4>
 				<p class="fragment">Exploit High-Performance techniques for the calibration of the parameters of the
 					GEOtop model (for 1D simulations) against real data.</p>
 			</section>
-			<section>
-				<p>Some context</p>
-			</section>
+		
 			<section>
 				<section>
-					<h3>Hydrology</h3>
+					<h3>About Hydrology</h3>
 				</section>
 				<section data-background-color="rgb(210, 162, 117)">
 					<video data-autoplay loop src="https://media.giphy.com/media/xT5LMpqtPVk2uLsoMM/giphy.mp4"></video>
@@ -60,6 +59,7 @@
 					<p>The study of the movement, distribution and management of the water on the <em>surface</em> of Earth.</p>
 				</section>
 			</section>
+	
 			<section>
 				<section>
 					<h3>The GEOtop model</h3>
@@ -80,49 +80,49 @@
 					<p><small>Reengineering and optimization of GEOtop software package, E. Bortoli</small></p>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>The Calibration</h3>
 				</section>
 				<section>
 					<h4>Inputs</h4>
-					<ul>
-						<li>Meteo data, elevations, soil parameters</li>
-						<li>Parameters have uncertainties or can be unknown.</li>
-						<li>Real systems are complex: effective values, phenomenological parametrization</li>
+					<p>Meteo data, elevations, soil parameters</p>
+					<ul class="fragment">
+						<li>Parameters with uncertainties or unknown</li>
+						<li>Phenomenological description, effective values</li>
 					</ul>
 				</section>
 				<section>
 					<h4>Outputs</h4>
-					<ul>
-						<li>Snow cover, soil temperature, soil moisture, etc.</li>
-						<li>Usually time-series, can be compared with experimental data.</li>
-						<li>The goodness of fit: squeeze the comparison into a single number.</li>
-					</ul>
+					<p> Ex: Snow cover, soil temperature, soil moisture</p>
+					<p class="fragment">Usually time-series, can be compared with experimental data and
+						squeezed into a single number: the goodness of fit (GoF).</p>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>Derivative-free optimization</h3>
 				</section>
 				<section>
-					<p>GEOtop ≈ black-box function: gets some inputs and spits out a number.</p>
-					<p>Gradients unknown: most minimization algorithms can't be used (es. SGD).</p>
+					<p>GEOtop as a black box: takes some inputs and spits out a number (the GoF).</p>
+					<p>No gradients: most minimization algorithms can't be used (es. SGD).</p>
 				</section>
 				<section>
 					<p>Heuristic algorithms explore the parameters space in a smart (read <em>hopefully not dumb</em>) way.</p>
-					<p>Not unusual in machine learning (e.g. in hyperparameters optimization).</p>
+					<p>Not unusual in machine learning and AI (e.g. in hyperparameters optimization).</p>
 				</section>
 			</section>
+
 			<section>
 				<section>
-					<h3>Hydrological relevance</h3>
+					<h3>The Hydrological Relevance</h3>
 				</section>
 				<section>
-					<p>Case study on data from LTSER (Long Term Socio-Ecological Research) sites in Val Mazia.</p>
+					<p>Case study: LTSER (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol.</p>
 				</section>
 				<section>
-					Moreover:
 					<ul>
 						<li>Sensitivity and Unceretainity analysis</li>
 						<li>Inference of physical parameters of the system</li>
@@ -130,6 +130,7 @@
 					</ul>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>The need of HPC</h3>
@@ -146,6 +147,7 @@
 					<p>The optimizer must scale</p>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>Bonus: algorithmic relevance</h3>
@@ -155,6 +157,7 @@
 					<p>Particle Swarm, Genetic Algorithms, Simulated Annealing, etc.</p>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>The proposed solution</h3>
@@ -168,13 +171,14 @@
 				</section>
 				<section>
 					<h4>An optimizer</h4>
-					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multinode?</p>
+					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multinode? Develop custom algorithms?</p>
 				</section>
 				<section>
-					<h4>A benchmark</h4>
-					<p>Automated scripts for testing on a case study.</p>
+					<h4>A benchmark suite</h4>
+					<p>Scripts for testing on a case study.</p>
 				</section>
 			</section>
+
 			<section>
 				<section>
 					<h3>HPC challenges</h3>
@@ -185,13 +189,14 @@
 				</section>
 				<section>
 					<p>What does strong scaling mean in this context?</p>
-					<!-- <p>The algorithms can return worst results on large number of workers.</p> -->
+					<!-- <p>The algorithms can return worse results on large number of workers.</p> -->
 				</section>
 				<section>
 					<p>What does weak scaling mean in this context?</p>
 					<!-- <p>What does it means to consider larger problems in this case?</p> -->
 				</section>
 			</section>
+
 			<!-- <section>
 				<section>
 					<h3>Future exploitation of this work</h3>
@@ -203,6 +208,7 @@
 					</ul>
 				</section>
 			</section> -->
+
 			<section>
 				<section>
 					<h3>Recap</h3>
@@ -217,17 +223,19 @@
 				</section>
 				<section>
 					<h4>The approach</h4>
-					<p>Using state-of-the-art algorithms and parallel programming techniques.</p>
+					<p>Using state-of-the-art parallel algorithms and programming techniques.</p>
 				</section>
 			</section>
+
 			<section>
 				<h3>Acknowledgments</h3>
 				<p>The research reported in this work will be supported
 					by OGS, Eurac and CINECA under HPC-TRES program award number 2019-33</p>
 			</section>
+
 			<section>
 				<h3>Q&A</h3>
-				<em>He who knows does not speak; He who speaks does not know.</em>
+				<em>He who knows does not speak; <br>He who speaks does not know.</em>
 				<p>(Laozi, <em>Tao Te Ching</em>)</p>
 			</section>
 		</div>
