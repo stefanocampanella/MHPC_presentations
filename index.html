@@ -77,7 +77,7 @@
 				</section>
 				<section>
 					<p>Thanks to the work done in the past MHPC editions is now more usable, robust and stable.</p>
-					<p><small>Reengineering and optimization of GEOtop software package, E. Bortoli</small></p>
+					<p><small>Re-engineering and optimization of GEOtop software package, E. Bortoli</small></p>
 				</section>
 			</section>
 
@@ -87,7 +87,7 @@
 				</section>
 				<section>
 					<h4>Inputs</h4>
-					<p>Meteo data, elevations, soil parameters</p>
+					<p>Meteorological data, elevations, soil parameters</p>
 					<ul class="fragment">
 						<li>Parameters with uncertainties or unknown</li>
 						<li>Phenomenological description, effective values</li>
@@ -111,7 +111,7 @@
 				</section>
 				<section>
 					<p>Heuristic algorithms explore the parameters space in a smart (read <em>hopefully not dumb</em>) way.</p>
-					<p>Not unusual in machine learning and AI (e.g. in hyperparameters optimization).</p>
+					<p>Not unusual in machine learning and AI (e.g. in hyper-parameters optimization).</p>
 				</section>
 			</section>
 
@@ -124,7 +124,7 @@
 				</section>
 				<section>
 					<ul>
-						<li>Sensitivity and Unceretainity analysis</li>
+						<li>Sensitivity and Uncertainty analysis</li>
 						<li>Inference of physical parameters of the system</li>
 						<li>Understanding of the model</li>
 					</ul>
@@ -136,7 +136,7 @@
 					<h3>The need of HPC</h3>
 				</section>
 				<section>
-					<p>GEOtop is compute bound (some time is spent on IO, definetly not memory bound).</p>
+					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound).</p>
 				</section>
 				<section>
 					<p>Optimization can require thousands of simulations.</p>
@@ -171,7 +171,7 @@
 				</section>
 				<section>
 					<h4>An optimizer</h4>
-					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multinode? Develop custom algorithms?</p>
+					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multi-node? Develop custom algorithms?</p>
 				</section>
 				<section>
 					<h4>A benchmark suite</h4>
@@ -184,7 +184,7 @@
 					<h3>HPC challenges</h3>
 				</section>
 				<section>
-					<p>The problem seems embarassingly parallel<span class="fragment">, <br>but it's not.</span></p>
+					<p>The problem seems embarrassingly parallel<span class="fragment">, <br>but it's not.</span></p>
 					<!-- <p class="fragment">The runs are independent, their arguments are not.</p> -->
 				</section>
 				<section>
