@@ -29,7 +29,7 @@
 				<section>
 					<h3>High-Performance Derivative-free Optimization for the GEOtop Model Calibration</h3>
 					<p>
-						<small><b>Stefano Campanella</b></small></p>
+						<small><strong>Stefano Campanella</strong></small></p>
 					<p>
 						<small>Giacomo Bertoldi, Alberto Sartori, Emanuele Cordano</small>
 					</p>
@@ -56,7 +56,7 @@
 				<section>
 					<h3>About Hydrology</h3>
 				</section>
-				<section data-background-color="rgb(210, 162, 117)">
+				<section>
 					<video data-autoplay loop src="https://media.giphy.com/media/xT5LMpqtPVk2uLsoMM/giphy.mp4"></video>
 				</section>
 				<!-- <section data-background-image="images/wikihydro.jpg">
@@ -116,8 +116,8 @@
 				<section>
 					<p>GEOtop simulates the water flow in the soil and the energy exchange with the atmosphere.</p>
 					<ul class="fragment">
-						<li>1D or 3D simulations.</li>
-						<li>Water or energy budgets, or both.</li>
+						<li><strong>1D</strong> or 3D simulations.</li>
+						<li>Water or energy budgets, or <strong>both</strong>.</li>
 					</ul>
 				</section>
 				<section>
@@ -134,7 +134,7 @@
 				<section>
 					<h3>The Calibration</h3>
 				</section>
-				<section data-background-image="images/knobs.jpg" style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6);">
+				<section data-background-image="images/knobs.jpg" data-background-size=contain style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6);">
 					<h4>Inputs</h4>
 					<p>Meteorological data, elevations, soil parameters</p>
 					<ul class="fragment">
@@ -159,9 +159,13 @@
 					<p>No gradients: most minimization algorithms can't be used (es. SGD).</p>
 				</section>
 				<section>
-					<p>Heuristic algorithms explore the parameters space in a smart (read <em>hopefully not dumb</em>)
-						way.</p>
-					<p>Not unusual in machine learning and AI (e.g. in hyper-parameters optimization).</p>
+					<p>
+						Heuristics explore the parameters space in a “<em>smart</em>” 
+						(read “<em>hopefully not dumb</em>”) way.
+					</p>
+					<p>
+						<small>Not unusual in ML and AI (e.g. hyper-parameters optimization).</small>
+					</p>
 				</section>
 			</section>
 
@@ -193,11 +197,11 @@
 					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound).</p>
 				</section>
 				<section>
-					<p>Optimization with many parameters can require thousands of simulations.</p>
-					<p>Each one takes ≈ 1 min.</p>
+					<p>Optimization with many parameters can require <span class="fragment highlight-red">thousands</span> of simulations.</p>
+					<p class="fragment highlight-red">Each one takes ≈ 1 min.</p>
 				</section>
-				<section data-background-color="red" data-background-transition="zoom">
-					<h4 style="color:white">Parallel is the only way</h4>
+				<section data-background-color="#FF2C2D" data-background-transition="zoom" style="color:#1F1F1F">
+					<h4 style="color:#1F1F1F">Parallel is the only way</h4>
 					<p>The optimizer must scale</p>
 				</section>
 			</section>
@@ -226,16 +230,19 @@
 						model = GEOtop(inputs_path)
 						model.run(check=True, capture_output=True)
 					</code></pre>
-					<p>GEOtoPy: Simple, paper-thin wrapper around GEOtop based on template configuration files</p>
+					<p><strong>GEOtoPy</strong>: Dead simple, paper-thin wrapper based on template configuration files</p>
 				</section>
 				<section>
 					<h4>An optimizer</h4>
-					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multi-node? Develop custom algorithms?
-					</p>
+					<ul>
+						<li>Forking Facebook Nevergrad?</li> 
+						<li>From scratch using Ray to go multi-node?</li> 
+						<li>Develop custom algorithms?</li>
+					</ul>
 				</section>
 				<section>
 					<h4>A benchmark suite</h4>
-					<p>Scripts for testing on a case study.</p>
+					<p>Scripts for testing on our case study.</p>
 				</section>
 			</section>
 
