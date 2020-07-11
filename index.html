@@ -7,6 +7,9 @@
 
 	<title>Calibrating 🌎top</title>
 
+	<meta name="description" content="High-Performance Derivative-free Optimization for the GEOtop Model Calibration">
+	<meta name="author" content="Stefano Campanella">
+
 	<link rel="stylesheet" href="reveal.js/dist/reset.css">
 	<link rel="stylesheet" href="reveal.js/dist/reveal.css">
 	<link rel="stylesheet" href="reveal.js/dist/theme/mhpc.css" id="theme">
@@ -21,31 +24,34 @@
 		<div class="slides">
 			<section>
 				<section>
-					<h1>Calibrating 🌎top</h1>
+					<h1 style="color:white">Calibrating <br>🌎top</h1>
 				</section>
 				<section>
 					<h3>High-Performance Derivative-free Optimization for the GEOtop Model Calibration</h3>
-					<h4>Stefano Campanella</h4>
-					<small>Giacomo Bertoldi, Alberto Sartori, Emanuele Cordano</small>
 					<p>
-						<img class="plain" src="images/mhpc.png" height="100px">
-						<img class="plain" src="images/hpctres.png" height="100px">
+						<small><b>Stefano Campanella</b></small></p>
+					<p>
+						<small>Giacomo Bertoldi, Alberto Sartori, Emanuele Cordano</small>
 					</p>
 					<p>
-						<img class="plain" src="images/sissa.png" height="100px">
-						<img class="plain" src="images/ictp.png" height="100px">
-						<img class="plain" src="images/ogs.png" height="100px">
-						<img class="plain" src="images/eurac.png" height="100px">
+						<img class="plain" src="images/mhpc.png" height="80px">
+						<img class="plain" src="images/hpctres.png" height="80px">
+					</p>
+					<p>
+						<img class="plain" src="images/sissa.png" height="60px">
+						<img class="plain" src="images/ictp.png" height="60px">
+						<img class="plain" src="images/ogs.png" height="60px">
+						<img class="plain" src="images/eurac.png" height="60px">
 					</p>
 				</section>
 			</section>
-			
+
 			<section>
 				<h4>The Project in One Sentence:</h4>
-				<p class="fragment">Exploit High-Performance techniques for the calibration of the parameters of the
+				<p>Exploit High-Performance techniques for the calibration of the parameters of the
 					GEOtop model (for 1D simulations) against real data.</p>
 			</section>
-		
+
 			<section>
 				<section>
 					<h3>About Hydrology</h3>
@@ -53,13 +59,56 @@
 				<section data-background-color="rgb(210, 162, 117)">
 					<video data-autoplay loop src="https://media.giphy.com/media/xT5LMpqtPVk2uLsoMM/giphy.mp4"></video>
 				</section>
-				<section data-background-image="images/wikihydro.jpg">
-					<h4>Hydrology according to Wikipedia</h4>
-					<p class="fragment highlight-red">(sorry, I'm not an hydrologist)</p>
-					<p>The study of the movement, distribution and management of the water on the <em>surface</em> of Earth.</p>
+				<!-- <section data-background-image="images/wikihydro.jpg">
+					<h4>According to Wikipedia</h4>
+					<blockquote cite="https://en.wikipedia.org/wiki/Hydrology">
+						“The study of the movement, distribution and management of the water on the surface of Earth”
+					</blockquote>
+					<p><small>(sorry, I'm not an hydrologist)</small></p>
+				</section> -->
+				<!-- <section data-background-image="images/wikihydro.jpg">
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>According to Wikipedia</h2>
+						<p>
+							<q cite="https://en.wikipedia.org/wiki/Hydrology">
+								The study of the movement, distribution and management of the water on the surface of Earth
+							</q>
+						</p>
+						<p><small>(sorry, I'm not an hydrologist)</small></p>
+					</div>
+				</section> -->
+				<!-- <section data-background-iframe="https://en.wikipedia.org/wiki/Hydrology" data-background-interactive>
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<p>
+							<q cite="https://en.wikipedia.org/wiki/Hydrology">
+								The study of the movement, distribution and management of the water on the surface of
+								Earth
+							</q>
+						</p>
+						<p>
+							<small>(sorry, I'm not an hydrologist)</small>
+						</p>
+					</div>
+				</section> -->
+				<section data-background-video="https://upload.wikimedia.org/wikipedia/commons/9/93/Earth%27s_Water_Cycle.ogv" data-background-video-muted=true>
+					<div
+						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+						<h2>According to Wikipedia</h2>
+						<p>
+							<q cite="https://en.wikipedia.org/wiki/Hydrology">
+								The study of the movement, distribution and management of the water on the surface of
+								Earth
+							</q>
+						</p>
+						<p>
+							<small>(sorry, I'm not an hydrologist)</small>
+						</p>
+					</div>
 				</section>
 			</section>
-	
+
 			<section>
 				<section>
 					<h3>The GEOtop model</h3>
@@ -85,7 +134,7 @@
 				<section>
 					<h3>The Calibration</h3>
 				</section>
-				<section>
+				<section data-background-image="images/knobs.jpg" style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6);">
 					<h4>Inputs</h4>
 					<p>Meteorological data, elevations, soil parameters</p>
 					<ul class="fragment">
@@ -110,7 +159,8 @@
 					<p>No gradients: most minimization algorithms can't be used (es. SGD).</p>
 				</section>
 				<section>
-					<p>Heuristic algorithms explore the parameters space in a smart (read <em>hopefully not dumb</em>) way.</p>
+					<p>Heuristic algorithms explore the parameters space in a smart (read <em>hopefully not dumb</em>)
+						way.</p>
 					<p>Not unusual in machine learning and AI (e.g. in hyper-parameters optimization).</p>
 				</section>
 			</section>
@@ -119,8 +169,12 @@
 				<section>
 					<h3>The Hydrological Relevance</h3>
 				</section>
-				<section>
+				<section data-background-image="http://pics.alpenv.eurac.edu/B2_RGB.jpg">
+					<div
+					style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); color: #fff;">
 					<p>Case study: LTSER (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol.</p>
+				</div>
+				
 				</section>
 				<section>
 					<ul>
@@ -139,11 +193,11 @@
 					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound).</p>
 				</section>
 				<section>
-					<p>Optimization can require thousands of simulations.</p>
+					<p>Optimization with many parameters can require thousands of simulations.</p>
 					<p>Each one takes ≈ 1 min.</p>
 				</section>
-				<section data-background-color="red">
-					<h4>Parallel is the only way</h4>
+				<section data-background-color="red" data-background-transition="zoom">
+					<h4 style="color:white">Parallel is the only way</h4>
 					<p>The optimizer must scale</p>
 				</section>
 			</section>
@@ -167,11 +221,17 @@
 				</section>
 				<section>
 					<h4>A wrapper</h4>
+					<pre><code data-trim data-noescape>
+						from geotopy.core import GEOtop
+						model = GEOtop(inputs_path)
+						model.run(check=True, capture_output=True)
+					</code></pre>
 					<p>GEOtoPy: Simple, paper-thin wrapper around GEOtop based on template configuration files</p>
 				</section>
 				<section>
 					<h4>An optimizer</h4>
-					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multi-node? Develop custom algorithms?</p>
+					<p>Adapting Facebook Nevergrad? From scratch using Ray to go multi-node? Develop custom algorithms?
+					</p>
 				</section>
 				<section>
 					<h4>A benchmark suite</h4>
@@ -204,7 +264,7 @@
 				<section>
 					<ul>
 						<li>Calibration specific GEOtop optimizations</li>
-						<li>Custom algorithms making use of statistical hypothesis on the paramerts</li>
+						<li>Custom algorithms making use of statistical hypothesis on the parameters</li>
 					</ul>
 				</section>
 			</section> -->
@@ -235,7 +295,7 @@
 
 			<section>
 				<h3>Q&A</h3>
-				<em>He who knows does not speak; <br>He who speaks does not know.</em>
+				<blockquote>“He who knows does not speak; <br>He who speaks does not know”</blockquote>
 				<p>(Laozi, <em>Tao Te Ching</em>)</p>
 			</section>
 		</div>
