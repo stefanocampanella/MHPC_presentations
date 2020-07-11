@@ -48,8 +48,8 @@
 
 			<section>
 				<h4>The Project in One Sentence:</h4>
-				<p>Exploit High-Performance techniques for the calibration of the parameters of the
-					GEOtop model (for 1D simulations) against real data.</p>
+				<p>Exploit HPC for the calibration of parameters of the
+					GEOtop hydrological model against real data</p>
 			</section>
 
 			<section>
@@ -117,7 +117,7 @@
 					<p>GEOtop simulates the water flow in the soil and the energy exchange with the atmosphere.</p>
 					<ul class="fragment">
 						<li><strong>1D</strong> or 3D simulations.</li>
-						<li>Water or energy budgets, or <strong>both</strong>.</li>
+						<li>Water or energy budgets, or <strong>both</strong></li>
 					</ul>
 				</section>
 				<section>
@@ -125,7 +125,7 @@
 					<p>Scientifically tested and published.</p>
 				</section>
 				<section>
-					<p>Thanks to the work done in the past MHPC editions is now more usable, robust and stable.</p>
+					<p>Thanks to the work done in the past MHPC editions is now more <strong>usable, robust and stable</strong>.</p>
 					<p><small>Re-engineering and optimization of GEOtop software package, E. Bortoli</small></p>
 				</section>
 			</section>
@@ -143,10 +143,10 @@
 					</ul>
 				</section>
 				<section>
-					<h4>Outputs</h4>
+					<h4>Output</h4>
 					<p> Ex: Snow cover, soil temperature, soil moisture</p>
 					<p class="fragment">Usually time-series, can be compared with experimental data and
-						squeezed into a single number: the goodness of fit (GoF).</p>
+						squeezed into a single number: <strong>the Goodness of Fit</strong> (GoF)</p>
 				</section>
 			</section>
 
@@ -155,8 +155,8 @@
 					<h3>Derivative-free optimization</h3>
 				</section>
 				<section>
-					<p>GEOtop as a black box: takes some inputs and spits out a number (the GoF).</p>
-					<p>No gradients: most minimization algorithms can't be used (es. SGD).</p>
+					<p>GEOtop as a <strong>black box</strong>: takes some inputs and spits out a number (the GoF).</p>
+					<p><strong>No gradients</strong>: most minimization algorithms can't be used (es. SGD)</p>
 				</section>
 				<section>
 					<p>
@@ -164,7 +164,7 @@
 						(read “<em>hopefully not dumb</em>”) way.
 					</p>
 					<p>
-						<small>Not unusual in ML and AI (e.g. hyper-parameters optimization).</small>
+						<small>Not unusual in ML and AI (e.g. hyper-parameters optimization)</small>
 					</p>
 				</section>
 			</section>
@@ -176,7 +176,7 @@
 				<section data-background-image="http://pics.alpenv.eurac.edu/B2_RGB.jpg">
 					<div
 					style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); color: #fff;">
-					<p>Case study: LTSER (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol.</p>
+					<p>Case study: LTSER (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol</p>
 				</div>
 				
 				</section>
@@ -194,14 +194,19 @@
 					<h3>The need of HPC</h3>
 				</section>
 				<section>
-					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound).</p>
+					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound)</p>
 				</section>
 				<section>
-					<p>Optimization with many parameters can require <span class="fragment highlight-red">thousands</span> of simulations.</p>
-					<p class="fragment highlight-red">Each one takes ≈ 1 min.</p>
+					<p>
+						Optimization with many parameters can require 
+						<span class="fragment highlight-red" data-fragment-index="1">thousands</span> of simulations.
+					</p>
+					<p>
+						Each one takes ≈ <span class="fragment highlight-red" data-fragment-index="1">1 min</span>
+					</p>
 				</section>
 				<section data-background-color="#FF2C2D" data-background-transition="zoom" style="color:#1F1F1F">
-					<h4 style="color:#1F1F1F">Parallel is the only way</h4>
+					<h4 style="color:#1F1F1F">Parallel muß sein!</h4>
 					<p>The optimizer must scale</p>
 				</section>
 			</section>
@@ -212,7 +217,9 @@
 				</section>
 				<section>
 					<p>Which algorithm is most suited for the problem?</p>
-					<p>Particle Swarm, Genetic Algorithms, Simulated Annealing, etc.</p>
+					<p>
+						<small>(Particle Swarm, Genetic Algorithms, Simulated Annealing, etc)</small>
+					</p>
 				</section>
 			</section>
 
@@ -221,7 +228,7 @@
 					<h3>The proposed solution</h3>
 				</section>
 				<section>
-					<p>Write, test and deploy three Python packages using modern software engineering techniques.</p>
+					<p>Write, test and deploy three Python packages using modern software engineering techniques</p>
 				</section>
 				<section>
 					<h4>A wrapper</h4>
@@ -242,7 +249,7 @@
 				</section>
 				<section>
 					<h4>A benchmark suite</h4>
-					<p>Scripts for testing on our case study.</p>
+					<p>Scripts for testing on our case study</p>
 				</section>
 			</section>
 
@@ -251,16 +258,22 @@
 					<h3>HPC challenges</h3>
 				</section>
 				<section>
-					<p>The problem seems embarrassingly parallel<span class="fragment">, <br>but it's not.</span></p>
-					<!-- <p class="fragment">The runs are independent, their arguments are not.</p> -->
+					<p>
+						The problem seems embarrassingly parallel<span class="fragment" data-fragment-index="1">, <br>but it's not.</span>
+					</p>
+					<p class="fragment" data-fragment-index="1" style="color:#FF2C2D">
+						Simulations are <em>independent</em>, <br>their parameters are <em>correlated</em>
+					</p>
 				</section>
 				<section>
 					<p>What does strong scaling mean in this context?</p>
-					<!-- <p>The algorithms can return worse results on large number of workers.</p> -->
+					<p class="fragment" style="color:#FF2C2D">
+						The optimizer could return worse results <br>when splitting the work
+					</p>
 				</section>
 				<section>
 					<p>What does weak scaling mean in this context?</p>
-					<!-- <p>What does it means to consider larger problems in this case?</p> -->
+					<p class="fragment" style="color:#FF2C2D">Larger problem = more particles/phenotypes?</p>
 				</section>
 			</section>
 
@@ -282,15 +295,19 @@
 				</section>
 				<section>
 					<h4>The goal</h4>
-					<p>Write a modern software capable of calibrating GEOtop in a reasonable amount of time.</p>
+					<p>Write a modern software capable of calibrating GEOtop in a reasonable amount of time</p>
 				</section>
 				<section>
 					<h4>The motivation</h4>
-					<p>Getting insights into derivative-free optimization while solving a real scientific problem.</p>
+					<p>
+						Getting insights into derivative-free optimization 
+						while solving a real scientific problem 
+						and open through HPC new scenarios (e.g. 3D calibration)
+					</p>
 				</section>
 				<section>
 					<h4>The approach</h4>
-					<p>Using state-of-the-art parallel algorithms and programming techniques.</p>
+					<p>Use state-of-the-art parallel algorithms and programming techniques</p>
 				</section>
 			</section>
 
