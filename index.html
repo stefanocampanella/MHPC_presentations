@@ -25,6 +25,7 @@
 			<section>
 				<section>
 					<h1 style="color:white">Calibrating <br>🌎top</h1>
+					<p>bit.ly/2W9rBCK</p>
 				</section>
 				<section>
 					<h3>High-Performance Derivative-free Optimization for the GEOtop Model Calibration</h3>
@@ -48,8 +49,10 @@
 
 			<section>
 				<h4>The Project in One Sentence:</h4>
-				<p>Exploit HPC for the calibration of parameters of the
-					GEOtop hydrological model against real data</p>
+				<p>
+					Exploit HPC for the calibration of parameters of the
+					GEOtop hydrological model against real data
+				</p>
 			</section>
 
 			<section>
@@ -59,47 +62,13 @@
 				<section>
 					<video data-autoplay loop src="assets/sideshowbob.mp4"></video>
 				</section>
-				<!-- <section data-background-image="assets/wikihydro.jpg">
-					<h4>According to Wikipedia</h4>
-					<blockquote cite="https://en.wikipedia.org/wiki/Hydrology">
-						“The study of the movement, distribution and management of the water on the surface of Earth”
-					</blockquote>
-					<p><small>(sorry, I'm not an hydrologist)</small></p>
-				</section> -->
-				<!-- <section data-background-image="assets/wikihydro.jpg">
-					<div
-						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-						<h2>According to Wikipedia</h2>
-						<p>
-							<q cite="https://en.wikipedia.org/wiki/Hydrology">
-								The study of the movement, distribution and management of the water on the surface of Earth
-							</q>
-						</p>
-						<p><small>(sorry, I'm not an hydrologist)</small></p>
-					</div>
-				</section> -->
-				<!-- <section data-background-iframe="https://en.wikipedia.org/wiki/Hydrology" data-background-interactive>
-					<div
-						style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-						<p>
-							<q cite="https://en.wikipedia.org/wiki/Hydrology">
-								The study of the movement, distribution and management of the water on the surface of
-								Earth
-							</q>
-						</p>
-						<p>
-							<small>(sorry, I'm not an hydrologist)</small>
-						</p>
-					</div>
-				</section> -->
 				<section data-background-video="assets/watercycle.m4v" data-background-video-muted=true>
 					<div
 						style="position: absolute; width: 50%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); padding: 20px; font-size: 20px; text-align: left;">
 						<h2>According to Wikipedia</h2>
 						<p>
 							<q cite="https://en.wikipedia.org/wiki/Hydrology">
-								The study of the movement, distribution and management of the water on the surface of
-								Earth
+								The study of the movement, distribution and management of the water on the surface of Earth
 							</q>
 						</p>
 						<p>
@@ -114,7 +83,7 @@
 					<h3>The GEOtop model</h3>
 				</section>
 				<section>
-					<p>GEOtop simulates the water flow in the soil and the energy exchange with the atmosphere.</p>
+					<p><a href="http://geotop.org">GEOtop</a> simulates the water flow in the soil and the energy exchange with the atmosphere.</p>
 					<ul class="fragment">
 						<li><strong>1D</strong> or 3D simulations.</li>
 						<li>Water or energy budgets, or <strong>both</strong></li>
@@ -126,7 +95,11 @@
 				</section>
 				<section>
 					<p>Thanks to the work done in the past MHPC editions is now more <strong>usable, robust and stable</strong>.</p>
-					<p><small>Re-engineering and optimization of GEOtop software package, E. Bortoli</small></p>
+					<p>
+						<small>
+							<a href="https://iris.sissa.it/handle/20.500.11767/86154">Re-engineering and optimization of GEOtop software package, E. Bortoli</a>
+						</small>
+					</p>
 				</section>
 			</section>
 
@@ -176,7 +149,7 @@
 				<section data-background-image="http://pics.alpenv.eurac.edu/B2_RGB.jpg">
 					<div
 					style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); color: #fff;">
-					<p>Case study: LTSER (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol</p>
+					<p>Case study: <a href="http://lter.eurac.edu">LTSER</a> (Long Term Socio-Ecological Research) sites in Val di Mazia, South Tyrol</p>
 				</div>
 				
 				</section>
@@ -191,7 +164,7 @@
 
 			<section>
 				<section>
-					<h3>The need of HPC</h3>
+					<h3>The need for HPC</h3>
 				</section>
 				<section>
 					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound)</p>
@@ -206,7 +179,7 @@
 					</p>
 				</section>
 				<section data-background-color="#FF2C2D" data-background-transition="zoom" style="color:#1F1F1F">
-					<h4 style="color:#1F1F1F">Parallel muß sein!</h4>
+					<h4 style="color:#1F1F1F">Muß es sein? Parallel muß sein!</h4>
 					<p>The optimizer must scale</p>
 				</section>
 			</section>
@@ -237,19 +210,19 @@
 						model = GEOtop(inputs_path)
 						model.run(check=True, capture_output=True)
 					</code></pre>
-					<p><strong>GEOtoPy</strong>: Dead simple, paper-thin wrapper based on template configuration files</p>
+					<p><a href="https://github.com/stefanocampanella/GEOtoPy">GEOtoPy</a>: Dead simple, paper-thin wrapper based on template configuration files</p>
 				</section>
 				<section>
 					<h4>A general optimizer</h4>
 					<ul>
-						<li>Forking Facebook Nevergrad?</li> 
-						<li>From scratch using Ray to go multi-node?</li> 
+						<li>Forking Facebook <a href="https://github.com/facebookresearch/nevergrad">Nevergrad</a>?</li> 
+						<li>From scratch using <a href="https://github.com/ray-project/ray">Ray</a> to go multi-node?</li> 
 						<li>Develop custom algorithms?</li>
 					</ul>
 				</section>
 				<section>
 					<h4>A benchmark suite</h4>
-					<p>Scripts for testing on our case study</p>
+					<p>Scripts to test the optimizer on our case study and perform model calibration and UA/SA</p>
 				</section>
 			</section>
 
@@ -307,7 +280,7 @@
 				</section>
 				<section>
 					<h4>The approach</h4>
-					<p>Use state-of-the-art parallel algorithms and programming techniques</p>
+					<p>Use state-of-the-art parallel algorithms and programming techniques learned during the MHPC</p>
 				</section>
 			</section>
 
