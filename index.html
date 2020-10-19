@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Calibrating GE🌎top</title>
+	<title>Resume</title>
 
 	<meta name="description" content="High-Performance Derivative-free Optimization for the GEOtop Model Calibration">
 	<meta name="author" content="Stefano Campanella">
@@ -16,6 +16,15 @@
 
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement( 'link' );
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName( 'head' )[0].appendChild( link );
+	</script>
 </head>
 
 <body>
@@ -23,280 +32,119 @@
 
 		<div class="slides">
 			<section>
-				<section>
-					<h1 style="color:white; text-transform:none">Calibrating <br>GE🌎top</h1>
-          <!-- <p><a href="https://bit.ly/2W9rBCK" target="_blank">bit.ly/2W9rBCK</a></p> -->
-				</section>
-				<section>
-					<h3>High-Performance Derivative-free Optimization for the GEOtop Model Calibration</h3>
-					<p>
-						<small><strong>Stefano Campanella</strong></small></p>
-					<p>
-						<small>Giacomo Bertoldi, Alberto Sartori, Emanuele Cordano</small>
-					</p>
-					<div style="margin: 0 auto; width: 60%; display:flex; justify-content:space-between">
-						<img class="plain" src="assets/mhpc.png" height="100px">
-						<img class="plain" src="assets/hpctres.png" height="100px">
-					</div>
-					<div style="display:flex; justify-content:space-between">
-						<img class="plain" src="assets/sissa.png" height="100px">
-						<img class="plain" src="assets/ictp.png" height="100px">
-						<img class="plain" src="assets/ogs.png" height="100px">
-						<img class="plain" src="assets/eurac.png" height="100px">
-					</div>
-				</section>
-			</section>
-
-			<section>
-				<h4>The Project in Brief:</h4>
-				<p>
-					Exploit HPC for the calibration of parameters of the
-					GEOtop hydrological model against data from a case study
-				</p>
+				<h1>Resume</h1>
+				<p>Stefano Campanella</p>
 			</section>
 
 			<section>
 				<section>
-					<h3>About Hydrology</h3>
+					<h2>Who?</h2>
 				</section>
 				<section>
-					<video data-autoplay loop src="assets/sideshowbob.mp4"></video>
-				</section>
-				<section data-background-video="assets/watercycle.m4v" data-background-video-muted=true>
-					<div
-						style="position: absolute; width: 50%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); padding: 20px; font-size: 20px; text-align: left;">
-						<h2>According to Wikipedia</h2>
-						<p>
-							<q cite="https://en.wikipedia.org/wiki/Hydrology">
-								The study of the movement, distribution and management of the water on the surface of
-								Earth
-							</q>
-						</p>
-						<p>
-							<small>(<strong>sorry, I'm not an hydrologist</strong>)</small>
-						</p>
-					</div>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>The GEOtop model</h3>
-				</section>
-				<section>
-					<p><a href="http://geotop.org" target="_blank">GEOtop</a> simulates the water flow in the soil and the energy
-						exchange with the atmosphere.</p>
-					<ul class="fragment">
-						<li><strong>1D</strong> or 3D simulations.</li>
-						<li>Water or energy budgets, or <strong>both</strong></li>
+					<h3>Education and Training</h3>
+					<ul>
+						<li>MSc in Theoretical Physics, University of Bari</li>
+						<a href="https://doi.org/10.1103/PhysRevD.98.114028" , target="_blank">
+							<small><em>S. Campanella, P. Colangelo, and F. De Fazio</em>, Phys. Rev. D 98, 114028</small>
+						</a>
+						<li>MHPC, SISSA and ICTP</li>
 					</ul>
 				</section>
 				<section>
-					<h4>20 years of development</h4>
-						<small>
-							<p>
-								<a href="https://dx.doi.org/10.5194/gmd-7-2831-2014" target="_blank">
-									<em>Endrizzi, S., Gruber, S., Dall'Amico, M., Rigon, R. (2014).</em>
-									Geoscientific Model Development 7(6), 2831-2857.
-								</a>	
-							</p>
-							<p>
-								<a href="https://dx.doi.org/10.1175/jhm497.1" target="_blank">
-									<em>Rigon, R., Bertoldi, G., Over, T. (2006).</em>
-									Journal of Hydrometeorology 7(3), 371-388.
-								</a>	
-							</p>
-						</small>
-				</section>
-				<section>
-					<p>Thanks to the work done in the past MHPC editions is now more <strong>usable, robust and
-							stable</strong>.</p>
-					<p>
-						<small>
-							<a href="https://iris.sissa.it/handle/20.500.11767/86154" target="_blank">Re-engineering and optimization of
-								GEOtop software package, E. Bortoli</a>
-						</small>
-					</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>The Calibration</h3>
-				</section>
-				<section data-background-image="assets/knobs.jpg" data-background-size=contain
-					style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6);">
-					<h4>Inputs</h4>
-					<p>Meteorological data, elevations, soil parameters</p>
-					<ul class="fragment">
-						<li>Parameters with uncertainties or unknown</li>
-						<li>Phenomenological description, effective values</li>
+					<h3>Work Experience</h3>
+					<ul>
+						<li>Embedded System Developer, Milan</li>
+						<li>Substitute Teacher (Phys & Math), La Spezia</li>
+						<div class=fragment>
+							<p>Funny enough, thanks to a script:</p>
+							<pre><code class="python" data-trim data-noescape>
+								# Sending MADs with Python! 
+								for indx, s in schools.iterrows():
+									send_email(code, "pec")
+							</code></pre>
+							<small>
+								(You can find the whole script
+								<a href="https://gist.github.com/stefanocampanella/de2b016db21ca933c2c601568c725438">here</a>)
+							</small>
+						</div>
 					</ul>
 				</section>
+				<!-- <section>
+					<h3>Awards</h3>
+					<ul>
+						<li>HPC-TRES fellowship, 2019-20. OGS, Eurac Research and CINECA</li>
+						<li>HPC-TRES research fellowship 2020-21. OGS (CRS), and CINECA</li>
+					</ul>
+				</section> -->
 				<section>
-					<h4>Output (1D case)</h4>
-					<p> Ex: Snow cover, soil temperature, soil moisture</p>
-					<p class="fragment">Usually time-series, can be compared with experimental data and
-						squeezed into a single number: <strong>the Goodness of Fit</strong> (GoF)</p>
+					<h3>Skills</h3>
+					<ul>
+						<li>C++ (C++11 and later), Python, Julia</li>
+						<li>Pandas, Scikit-learn, PyTorch, TensorFlow</li>
+						<li>OpenMP, MPI, CUDA, Async IO</li>
+						<li>GNU/Linux, Git, GNU Toolchain</li>
+					</ul>
+					<p class=fragment><small>(and functional programming enthusiast!)</small></p>
 				</section>
 			</section>
 
 			<section>
 				<section>
-					<h3>Derivative-free optimization</h3>
+					<h2>What?</h2>
 				</section>
 				<section>
-					<p>GEOtop as a <strong>black box</strong>: takes some inputs and spits out a number (the GoF).</p>
-					<p><strong>No gradients</strong>: most minimization algorithms can't be used (es. SGD)</p>
+					<h3>My MHPC Project in Brief</h3>
+					<p>Exploit HPC for the calibration of parameters of the GEOtop hydrological model</p>
+					<p>Challenges: many parameters, no good prior, CPU bounded (cf. ML/AI hyperparameter optimization)<p>
+					<p class="fragment highlight-red">Parallel Derivative-free heuristic algorithms are the only option</p>
 				</section>
 				<section>
-					<p>
-						Heuristics explore the parameters space in a “<em>smart</em>”
-						(read “<em>hopefully not dumb</em>”) way.
-					</p>
-					<p>
-						<small>Not unusual in ML and AI (e.g. hyper-parameters optimization)</small>
-					</p>
+					<h3>Goals</h3>
+					<ol>
+						<li>Write a reusable calibration tool, with a simple yet general enough interface, easily deployable on HPC systems</li>
+						<li>Benchmark algorithms, objective functions, and hyperparameters</li>
+					</ol>
+				</section>
+				<section>
+					<h3>Approach/Design Choices</h3>
+					<ul>
+						<li>Python: simple language, good tooling and wide adoption</li>
+						<li>Modularity, encapsulation and referential transparency</li>
+						<li>Emphasis on documentation and reproducibility</li>
+						<li>Do not reinvent the wheel</li>
+						<ul>
+							<li>Deployment: Pipenv, Papermill, Singularity</li>
+							<li>Libs: Nevergrad, SALib, Ray</li>
+						</ul>
+					</ul>
 				</section>
 			</section>
 
 			<section>
 				<section>
-					<h3>The Hydrological Relevance</h3>
-				</section>
-				<section data-background-image="http://pics.alpenv.eurac.edu/B2_RGB.jpg">
-					<div
-						style="box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.6); color: #fff;">
-						<p>Case study: <a href="http://lter.eurac.edu" target="_blank">LTSER</a> (Long Term Socio-Ecological Research)
-							sites in Val di Mazia, South Tyrol</p>
-					</div>
-
+					<h2>When? Where?</h2>
 				</section>
 				<section>
 					<ul>
-						<li>Sensitivity and Uncertainty analysis</li>
-						<li>Inference of physical parameters of the system</li>
-						<li>Understanding of the model</li>
+						<li>The MHPC lectures ended in July, 2020</li>
+						<li>Now I am working on my thesis, graduation expected in December</li>
+						<li>Trieste (SISSA and ICTP) <span class="fragment strike">and Bolzano (Eurac)</span></li>
 					</ul>
 				</section>
 			</section>
 
 			<section>
 				<section>
-					<h3>Bonus: algorithmic relevance</h3>
+					<h2>Why?</h2>
 				</section>
 				<section>
-					<p>Which algorithm is most suited for the problem?</p>
-					<p>
-						<small>(<a href="https://rdrr.io/github/ecor/geotopOptim/">Particle Swarm</a>, Genetic Algorithms, Simulated Annealing, etc)</small>
-					</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>The need for HPC</h3>
-				</section>
-				<section>
-					<p>GEOtop is compute bound (some time is spent on IO, definitely not memory bound)</p>
-				</section>
-				<section>
-					<p>
-						Optimization with many parameters can require
-						<span class="fragment highlight-red" data-fragment-index="1">thousands</span> of simulations.
-					</p>
-					<p>
-						Each one takes ≈ <span class="fragment highlight-red" data-fragment-index="1">1 min</span>
-					</p>
-				</section>
-				<section data-background-color="#FF2C2D" data-background-transition="zoom" style="color:#1F1F1F">
-					<h4 style="color:#1F1F1F">Muß es sein? Parallel muß sein!</h4>
-					<p>The optimizer must scale</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>The proposed solution</h3>
-				</section>
-				<section>
-					<p>Write, test and deploy three Python packages using modern software engineering techniques</p>
-				</section>
-				<section>
-					<h4>A wrapper</h4>
-					<pre><code class="python" data-trim data-noescape>
-						from geotopy.core import GEOtop
-						model = GEOtop(input_path)
-						model.run(check=True, capture_output=True)
-					</code></pre>
-					<p><a href="https://github.com/stefanocampanella/GEOtoPy" target="_blank">GEOtoPy</a>: Dead simple, paper-thin
-						wrapper based on template configuration files</p>
-				</section>
-				<section>
-					<h4>A general optimizer</h4>
+					<h3>AI at Leonardo Labs</h3>
 					<ul>
-						<li>Forking Facebook <a href="https://github.com/facebookresearch/nevergrad" target="_blank">Nevergrad</a>?</li>
-						<li>From scratch using <a href="https://github.com/ray-project/ray" target="_blank">Ray</a> to go multi-node?</li>
-						<li>Develop custom algorithms?</li>
+						<li>Technological challenges ahead (ex. GPT-3)</li>
+						<li>Theory: moving target</li>
+						<li>Applications: from industry to academia</li>
 					</ul>
 				</section>
-				<section>
-					<h4>A benchmark suite</h4>
-					<p>Scripts to test the optimizer on our case study and perform model calibration and UA/SA</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>HPC challenges</h3>
-				</section>
-				<section>
-					<p>
-						The problem seems embarrassingly parallel<span class="fragment" data-fragment-index="1">,
-							<br>but it's not.</span>
-					</p>
-					<p class="fragment" data-fragment-index="1" style="color:#FF2C2D">
-						Simulations are <em>independent</em>, <br>their parameters are <em>correlated</em>
-					</p>
-				</section>
-				<section>
-					<p>What does strong scaling mean in this context?</p>
-					<p class="fragment" style="color:#FF2C2D">
-						The optimizer could return worse results <br>when splitting the work
-					</p>
-				</section>
-				<section>
-					<p>What does weak scaling mean in this context?</p>
-					<p class="fragment" style="color:#FF2C2D">Larger problem = more particles/phenotypes?</p>
-				</section>
-			</section>
-
-			<section>
-				<section>
-					<h3>Recap</h3>
-				</section>
-				<section>
-					<h4>The goal</h4>
-					<p>Write a reusable software capable of calibrating GEOtop in a reasonable amount of time</p>
-				</section>
-				<section>
-					<h4>The motivation</h4>
-					<p>
-						Getting insights into derivative-free optimization
-						while solving a real scientific problem
-						and opening new scenarios through HPC (e.g. 3D calibration)
-					</p>
-				</section>
-				<section>
-					<h4>The approach</h4>
-					<p>Use state-of-the-art parallel algorithms and programming techniques learned during the MHPC</p>
-				</section>
-			</section>
-
-			<section>
-				<h3>Acknowledgments</h3>
-				<p>The research reported in this work will be supported
-					by OGS, Eurac and CINECA under HPC-TRES program award number 2019-33</p>
 			</section>
 
 			<section>
@@ -304,6 +152,7 @@
 				<blockquote>“He who knows does not speak; <br>He who speaks does not know”</blockquote>
 				<p>(Laozi, <em>Tao Te Ching</em>)</p>
 			</section>
+
 		</div>
 	</div>
 
