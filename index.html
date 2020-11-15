@@ -63,7 +63,7 @@
 									send_email(code, "pec")
 							</code></pre>
 							<small>
-								(You can find the whole script
+								(You can find the rest
 								<a href="https://gist.github.com/stefanocampanella/de2b016db21ca933c2c601568c725438">here</a>)
 							</small>
 						</div>
@@ -79,8 +79,7 @@
 				<section>
 					<h3>Skills</h3>
 					<ul>
-						<li>C++ (C++11 and later), Python, Julia</li>
-						<li>Pandas, Scikit-learn, PyTorch, TensorFlow</li>
+						<li>C++ (C++11 and later), Python, <span class="fragment highlight-red">Julia</span></li>
 						<li>OpenMP, MPI, CUDA, Async IO</li>
 						<li>GNU/Linux, Git, GNU Toolchain</li>
 					</ul>
@@ -93,29 +92,17 @@
 					<h2>Current activity</h2>
 				</section>
 				<section>
-					<h3>My MHPC Project in Brief</h3>
-					<p>Exploit HPC for the calibration of parameters of the GEOtop hydrological model</p>
-					<p>Challenges: many parameters, no good prior, CPU bounded (cf. ML/AI hyperparameter optimization)<p>
-					<p class="fragment highlight-red">Parallel Derivative-free heuristic algorithms are the only option</p>
+					<h3>MHPC Project</h3>
+					<p>HPC for environmental model calibration</p>
+					<p class=fragment>Many parameters, no good prior, CPU bounded simulations (cf. hyperparameter tuning )<p>
+					<p class=fragment style="color: #ff2c2d">Parallel heuristics are the only option</p>
 				</section>
 				<section>
-					<h3>Goals</h3>
-					<ol>
-						<li>Write a reusable calibration tool, with a simple yet general enough interface, easily deployable on HPC systems</li>
-						<li>Benchmark algorithms, objective functions, and hyperparameters</li>
-					</ol>
-				</section>
-				<section>
-					<h3>Approach/Design Choices</h3>
+					<h3>Approach</h3>
 					<ul>
-						<li>Python: simple language, good tooling and wide adoption</li>
-						<li>Modularity, encapsulation and referential transparency</li>
-						<li>Emphasis on documentation and reproducibility</li>
-						<li>Do not reinvent the wheel</li>
-						<ul>
-							<li>Deployment: Pipenv, Papermill, Singularity</li>
-							<li>Libs: Nevergrad, SALib, Ray</li>
-						</ul>
+						<li>Python: orchestration/glue language</li>
+						<li>Reusability, Reproducibility & Documentation (GEOtoPy + Jupyter) </li>
+						<li>Don't reinvent the wheel (Nevergrad + Dask)</li>
 					</ul>
 				</section>
 			</section>
