@@ -7,15 +7,16 @@
 
 	<title>Calibrating GE🌎top</title>
 
-	<meta name="description" content="High-Performance Derivative-free Optimization for the GEOtop Model Calibration">
+	<meta name="description" content="Calibration of the GEOtop model using evolutionary algorithms on supercomputers">
 	<meta name="author" content="Stefano Campanella">
 
 	<link rel="stylesheet" href="reveal.js/dist/reset.css">
 	<link rel="stylesheet" href="reveal.js/dist/reveal.css">
 	<link rel="stylesheet" href="reveal.js/dist/theme/mhpc.css" id="theme">
-
 	<!-- Theme used for syntax highlighted code -->
 	<link rel="stylesheet" href="reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+	<!-- Theme used for katex -->
+	<link rel="stylesheet" <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
 		<div class="slides">
 			<section>
-				<h3>An empirical study on the calibration of the GEOtop	model using supercomputers</h3>
+				<h1>GEOtop calibration using evolutionary algorithms on supercomputers</h1>
 				<p>
 					<small><strong>Stefano Campanella</strong></small></p>
 				<p>
@@ -42,121 +43,421 @@
 			</section>
 			
 			<section>
-				<h4>This presentation in one sentence</h4>
-				<p>
-					Exploit HPC for the calibration of parameters of the
-					GEOtop hydrological model.
-				</p>
-			</section>
-
-			<section>
-				<h4>Outline</h4>
+				<h3>Outline</h3>
 				<ol>
-					<li>10'000 foot view of GEOtop</li>
-					<li>Example of calibration using GEOtoPy</li>
-					<li>Hyperparameter optimization</li>
-					<li>The project HPC take-away</li>
+					<li>
+						<b>Intro &amp; Motivations</b>
+						<ol>
+							<li>GEOtop and its calibration</li>
+							<li>Evolutionary algorithms and need for HPC</li>
+						</ol>
+					</li>
+					<li>
+						<b>Methodology &amp; Implementation</b>
+						<ol>
+							<li>Workflow: Jupyter, Nevergrad, GEOtoPy</li>
+							<li>Parallel Computing in Python and Dask</li>
+							<li>The Optimization Loop</li>
+						</ol>
+					</li>
+					<li>
+						<b>Results</b>
+						<ol>
+							<li>Example of Calibration</li>
+							<li>Scaling Analysis and Modeling</li>
+						</ol>
+					</li>	
 				</ol>
 			</section>
 
 			<section>
-				<h4>Motivations</h4>
-				<img class="plain" src="assets/venn.png" height="400px">
-			</section>
+				<section>
+					<h2>GEOtop Calibration</h2>
+				</section>
 
-			<section>
-				<h4>Disclaimer</h4>
-				<video data-autoplay loop src="assets/sideshowbob.mp4"></video>
-				<p><em>(I am not an hydrologist)</em></p>
-			</section>
+				<section 
+					data-background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Water_cycle_diagram.pdf/page1-1280px-Water_cycle_diagram.pdf.jpg"
+					data-background-size=contain>
+				</section>
 
-			<section>
-				<h4>Poor man's intro to hydrological modeling</h4>
-				<p class=fragment>meterological forcing ↦ soil water content</p>
-				<p class=fragment>PDEs + discretization ⇒ Large system of ODEs</p>
-				<p class=fragment># of parameters ≈ O(volume) + O(surface)</p>
-			</section>
+				<section 
+					data-background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Water_cycle_diagram.pdf/page1-1280px-Water_cycle_diagram.pdf.jpg"
+					data-background-opacity=0.3
+					data-background-size=contain>
+					<!-- <h4>Poor man's intro to GEOtop calibration</h4> -->
+					<p>meterological forcing ↦ soil water content</p>
+					<p class=fragment>№ of parameters ≈ O(volume) + O(surface)</p>
+					<p class=fragment>loss = ||predictions - observations||</p>
+					<p class=fragment>
+						<span style="color: #FF2C2D">large</span> search space, 
+						<span style="color: #FF2C2D">high</span> sensitivity to parameters
+					</p>
+					<p class=fragment>
+						1D Workload: CPU-bounded, serial, 
+						<span style="color: #FF2C2D">ETA ≈ 1 min</span>
+					</p>
+				</section>
 
-			<section>
-				<h4>GEOtop, 1D simulations</h4>
-				<p># parameters is still <span style="color: #FF2C2D">large</span>, sensitivities are <span style="color: #FF2C2D">high</span></p>
-				<p class=fragment>CPU-bounded, fully sequential, <span style="color: #FF2C2D">ETA ≈ 1 min</span></p>
-			</section>
-
-			<section>
-				<h4>An optimization problem</h4>
-				<p>loss = ||predictions - observations||</p>
-				<p class=fragment>Huge search space <span class=fragment>⇒ <strike>local search</strike></span></p>
-				<p class=fragment>Expensive loss ⇒ parallel<span style="color:#FF2C2D" class=fragment><b> ← HPC kicks in</b></span></p>
-			</section>
-
-			<section>
-				<h3>A calibration example</h3>
-			</section>
-
-			<section data-background-iframe="https://stefanocampanella.github.io/MHPC-project/approach/examples/calibration.html" data-background-interactive>
-			</section>
-
-			<section data-transition="fade">
-				<h4>Still to be answered</h4>
-				<ul>
-					<li>How to compare predictions and observations?</li>
-					<li>Which algorithm and hyperparameters?</li>
-					<li>How many CPUs?</li>
-					<li>How long should I wait?</li>
-					<li>How “good” are the results?</li>
-					<li>Can I wait less or use less CPUs?</li>
-				</ul>
-			</section>
-
-			<section>
-				<h4>Hyperparameter optimization</h4>
-
-				<p>Multi-objective optimization using randomized synthetic data, with two criteria:</p>
-				<ul>
-					<li><em>quality</em> of the calibration</li>
-					<li>execution time</li>
-				</ul>
-
-				<p class=fragment>This task is not possible on commodity hardware</p>
-			</section>
-
-			<section>
-				<h2>HPC take-away</h2>
-				<p>A philosophical, personal take on the subject</p>
+				<section 
+					data-background-image="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Water_cycle_diagram.pdf/page1-1280px-Water_cycle_diagram.pdf.jpg"
+					data-background-opacity=0.3
+					data-background-size=contain>
+					<a href="https://imgflip.com/i/4z5dqs"><img src="https://i.imgflip.com/4z5dqs.jpg"/></a>
+				</section>
 			</section>
 			
 			<section>
-				<h4>Don't reinvent the wheel</h4>
-				<blockquote>“Code reuse is the Holy Grail of Software Engineering”</blockquote>
-				<p>Douglas Crockford</p>
-			</section>
-			
-			<section>
-				<h4>Beware of the HPC hype and its mental traps, but stay curious</h4>
-				<blockquote style="font-size:large">
-					“Throughout human history, as our species has faced the frightening, 
-					terrorizing fact that we do not know who we are, or where we are going 
-					in this ocean of chaos, it has been the authorities—the political, 
-					the religious, the educational authorities—who attempted to comfort us 
-					by giving us order, rules, regulations, informing—forming in our 
-					minds—their view of reality. To think for yourself you must question 
-					authority and learn how to put yourself in a state of vulnerable 
-					open-mindedness, chaotic, confused vulnerability to inform yourself.”
-				</blockquote>
-				<p style="font-size:large">Timothy Leary, <em>How to Operate Your Brain (1994)</em></p>
+				<section>
+					<h2>Evolutionary Algorithms and Need for HPC</h2>
+				</section>
+
+				<section>
+					<h3>Random Optimization Process</h3>
+					<table>
+						<tbody>
+							<tr>
+								<td>search space</td>
+								<td>\(D \subseteq \mathbb{R}^n \), compact</td>
+							</tr>
+							<tr>
+								<td>objective</td>
+								<td>\(f: D \mapsto [0, +\infty)\), continuous</td>
+							</tr>
+							<tr>
+								<td>optimization</td>
+								<td>\(X_i: \Omega \mapsto D \mid 
+									f\left(X_i\right) \leq f\left(X_{i-1}\right)\)</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+				<section>
+					<h3>Random Search</h3>
+					<p>
+						\[X_0 = U_0, \, X_i = 
+						\begin{cases} 
+							U_i &amp; \text{if } f(U_i) \leq f(X_{i-1}) \\ 
+							X_{i-1} &amp; \text{otherwise} 
+						\end{cases}\]
+					</p>	
+				</section>
+
+				<section>
+					<h3>Evolutionary Algorithms</h3>
+					<p>
+						\[ X_i = X_i \left( X_{i-1}, Z_i^j, f ( Z_i^j ) \right) \]
+						\[ Z_i^j = Z_i^j \left( Z_{i-1}^{j'}, f ( Z_{i-1}^{j'} ) \right) \]
+					</p>
+					<p>
+						\( \left\{ Z_i^j \right\}_{1 \leq j \leq p} \) 
+						<span style="color:#FF2C2D">independent</span> 
+						(\(i\)-th gen population)
+					</p>
+				</section>
+
+				<section>
+					<h3>Scaling</h3>
+					<p>
+						parallel evaluation of \( f(Z_i^j)\) 
+						<span style="color:#FF2C2D" class=fragment><b> ← HPC kicks in</b></span>
+					</p>
+					<p class="fragment">
+						speedup with \(n\) CPU is \(\min\left(p, n \right) \)
+						<span class=fragment>, in theory</span>
+					</p>
+					<p class="fragment">
+						best case: few generations, large \(p\)
+						<span class=fragment>, in theory</span>
+					</p>
+				</section>
+
+				<section>
+					<h3>Role of the population size</h3>
+					<p>Evolutionary algorithms do two things:</p>
+					<ol>
+						<li>locate a region of search space</li>
+						<li>explore that region</li>
+					</ol>
+					<p class=fragment>
+						The <em>balance</em> is regulated by population size \(p\): 
+						larger \(p\) means slower convergence
+					</p>
+					<p class=fragment>
+						In this work we consider the algorithm, 
+						the number of generations and 
+						of individuals <span style="color:#FF2C2D">fixed</span>.
+					</p>
+				</section>
 			</section>
 
 			<section>
-				<h3>Acknowledgments</h3>
+				<section>
+					<h2>Tools</h2>
+				</section>
+
+				<section>
+					<ol>
+						<li>Jupyter Ecosystem: JupyterLab, Papermill, Scrapbook</li>
+						<li>Facebook Nevergrad</li>
+						<li>GEOtoPy</li>
+						<li>Dask</li>
+					</ol>
+				</section>
+
+				<section>
+					<h3>Parallel Computing in Python</h3>
+					<p>The GIL: Multithreading and Multiprocessing</p>
+					<p>Distributed Computing using Dask</p>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Optimization Loop</h2>
+				</section>
+				<section>
+					<h3>OOP interface</h3>
+					<pre><code data-trim data-noescape class=python>
+					while not optimizer.stop():
+					    x = optimizer.ask()
+					    y = f(x)
+					    optimizer.tell(x, y)
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Parallel Execution using Futures</h3>
+					<pre><code data-trim data-noescape class=python>
+					for _ in range(num_generations):
+					    for i in range(popsize):
+					        x[i] = optimizer.ask()
+					    	
+					    for i in range(popsize):
+					        futures[i] = client.submit(lambda x: (x, f(x)), x[i])
+					
+					    to_tell = [] 
+					    for future in as_completed(futures):
+					        to_tell.append(future.result())
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Speculative execution</h3>
+					<pre><code data-trim data-noescape class=python>
+					completed_queue = as_completed(futures)   
+					to_tell = []
+					for future in completed_queue:
+					    x, y = future.result()
+					    if isfinite(y):
+					        to_tell.append(future.result())
+					    if len(to_tell) + completed_queue.count() < popsize:
+					        for _ in range(num_new_futures):
+					            new_x = optimizer.ask()
+					            new_future = client.submit(lambda x: (x, f(x)), 
+					                                       new_x)
+					            completed_queue.add(new_future)
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Running on the Cluster</h2>
+				</section>
+				<section>
+					<h3>The Run Script</h3>
+					<pre><code data-trim data-noescape class=bash data-line-numbers="18|35-37|39|41-44|47-55|57-66|67-80">
+					#! /usr/bin/env bash
+					#SBATCH --tasks-per-node=1
+					#SBATCH --cpus-per-task=32
+					#SBATCH --mem-per-cpu=400MB
+					#SBATCH --hint=nomultithread
+					#SBATCH --hint=compute_bound
+					#SBATCH --mail-type=ALL
+					#SBATCH --verbose
+
+					SITE=$1
+					PARAMETERS_PATH=$2
+					ALGORITHM=$3
+					POPSIZE=$4
+					NUM_GENERATIONS=$5
+					TIMEOUT=$6
+					OUTPUT_DIR=$7
+
+					export TMPDIR=/dev/shm
+					export PYTHONPATH=$PYTHONPATH:$MHPCPROJECT_ROOT
+					export DASK_CONFIG=$MHPCPROJECT_ROOT/config/dask
+
+					INPUT="$MHPCPROJECT_ROOT/notebooks/calibration.ipynb"
+					MODEL_PATH="$MHPCPROJECT_ROOT/data/$SITE/inputs"
+					OBSERVATIONS_PATH="$MHPCPROJECT_ROOT/data/$SITE/observations/obs.csv"
+					NUM_PROCS=4
+					NUM_CPUS=$((SLURM_CPUS_PER_TASK * SLURM_NTASKS))
+					NUM_WORKERS=$((NUM_PROCS * SLURM_NTASKS))
+					BUDGET=$((NUM_GENERATIONS * POPSIZE))
+					SCHEDULER_WAIT_RETRY_MAX=10
+
+					mkdir -p "$OUTPUT_DIR"
+					OUTPUT="$(mktemp -p "$OUTPUT_DIR" \
+						"$SITE-$ALGORITHM-$BUDGET-$NUM_CPUS-XXX.ipynb")"
+
+					mkdir -p "$MHPCPROJECT_ROOT/scheduler_files"
+					SCHEDULER_FILE="$(mktemp -p "$MHPCPROJECT_ROOT/scheduler_files" \
+						scheduler-XXX.json)"
+
+					ulimit -n 128000
+
+					dask-scheduler --scheduler-file="$SCHEDULER_FILE" \
+								--no-dashboard \
+								--no-show \
+								--interface=ib0 &
+					sleep 30
+
+					SCHEDULER_WAIT_RETRY_COUNT=0
+					while \
+					! python "$MHPCPROJECT_ROOT"/scripts/check_address.py "$SCHEDULER_FILE" && \
+					[[ $SCHEDULER_WAIT_RETRY_COUNT -lt $SCHEDULER_WAIT_RETRY_MAX ]]
+					do
+					SCHEDULER_WAIT_RETRY_COUNT=$((SCHEDULER_WAIT_RETRY_COUNT + 1))
+					sleep 30
+					done
+					python "$MHPCPROJECT_ROOT"/scripts/check_address.py "$SCHEDULER_FILE"
+
+					srun dask-worker --scheduler-file="$SCHEDULER_FILE" \
+									--local-directory="/tmp" \
+									--death-timeout=180 \
+									--no-dashboard \
+									--no-show \
+									--nprocs=$NUM_PROCS \
+									--nthreads=\
+									$((SLURM_CPUS_PER_TASK / NUM_PROCS)) \
+									--interface=ib0 &
+
+					papermill --no-progress-bar \
+							-p model_path "$MODEL_PATH" \
+							-p timeout "$TIMEOUT" \
+							-p observations_path "$OBSERVATIONS_PATH" \
+							-p parameters_path "$PARAMETERS_PATH" \
+							-p algorithm "$ALGORITHM" \
+							-p popsize "$POPSIZE" \
+							-p num_generations "$NUM_GENERATIONS" \
+							-p scheduler_file "$SCHEDULER_FILE" \
+							-p num_cpus $NUM_CPUS \
+							-p num_workers $NUM_WORKERS \
+							-p performance_report_filename \
+							"${OUTPUT%.ipynb}-performance-report.html" \
+							"$INPUT" "$OUTPUT"
+					jupyter nbconvert --to html "$OUTPUT"
+					rm "$SCHEDULER_FILE"
+					</code></pre>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h2>Calibration example</h2>
+				</section>
+
+				<section 
+					data-background-iframe="assets/DOMES-NGO-4096-256-DeW.html" 
+					data-background-interactive>
+				</section>
+			</section>
+			
+			<section>
+				<section>
+					<h2>Scaling Analysis</h2>
+				</section>
+
+				<section style="font-size: xx-large">
+					<p>\(T(p, n)\) calibration time with \(p\) individuals and \(n\) CPUs</p>
+					<p class=fragment>
+						\(S(p, n) := \frac{T(p, n_0)}{T(p, n)}\), 
+						speedup using \(n_0 = 32\) CPUs as reference
+					</p>
+					<p class=fragment>
+						\(S(p, n) = \frac{\min(p, n)}{n_0} \), 
+						perfect speedup
+					</p>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black">Strong Scaling</h3>
+					<img src=assets/scaling_7_0.png>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black">Weak Scaling</h3>
+					<img src=assets/scaling_12_0.png>
+				</section>
+
+				<section>
+					<h3>Linear Model</h3>
+					<p>
+						The simplest performance model compatible with 
+						perfect weak scaling \(T(p, n) = T(\frac{p}{n})\)
+						and \(T(p, n) \sim \mathcal{O}(p)\) is
+						\[T(p, n) = T_0 + T_1 \frac{p}{n}\]
+					</p>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black"> Linear Model Fit</h3>
+					<img src=assets/scaling_16_0.png>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black"> Linear Model Speedup</h3>
+					<img src=assets/scaling_18_0.png>
+				</section>
+
+				<section>
+					<p> 
+						Comparing the linear model speedup
+						\[S(p, n) = \frac{T_0 + T_1 \frac{p}{n_0}}{T_0 + T_1 \frac{p}{n}} = 
+						\frac{1}{\frac{T_0}{T_0 + T_1 \frac{p}{n_0}} + 
+						\frac{T_1 \frac{p}{n_0}}{T_0 + T_1 \frac{p}{n_0}} \frac{n_0}{n}}\]
+						with the Amdahl law \(S(n) = \frac{1}{(1 - f) + f \frac{n_0}{n}} \) we get
+						\[f = \frac{T_1 \frac{p}{n_0}}{T_0 + T_1 \frac{p}{n_0}} \approx 97 \%\]
+					</p>
+				</section>
+
+				<section>
+					<h3>Models for Large Numbers of CPUs</h3>
+					\[T_\text{piecewise}(p, n) = \begin{cases} 
+					T_0 + T_1 \left( \frac{p}{n} - x_0 \right) & \text{if } \frac{p}{n} \geq x_0 \\ 
+					T_0 & \text{otherwise}
+					\end{cases}\]
+					\[T_\text{rational}(p, n) = T_0 + T_1 \frac{x_0 \left(\frac{1}{x_0} 
+					\frac{p}{n}\right)^2}{1 + \frac{1}{x_0} \frac{p}{n}}\]
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black"> Piecewise Linear Model Speedup</h3>
+					<img src=assets/scaling_29_0.png>
+				</section>
+				
+				<section data-background-color=white>
+					<h3 style="color:black"> Rational Function Model Speedup</h3>
+					<img src=assets/scaling_35_0.png>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black"> Large CPUs Number Comparison</h3>
+					<img src=assets/scaling_39_0.png>
+				</section>
+
+				<section data-background-color=white>
+					<h3 style="color:black"> Large CPUs Number Comparison</h3>
+					<img src=assets/scaling_40_0.png>
+				</section>
+			</section>
+
+			<section>
+				<h2>Acknowledgments</h2>
 				<p>The research reported in this work will be supported
 					by OGS, Eurac and CINECA under HPC-TRES program award number 2019-33</p>
-			</section>
-
-			<section>
-				<h3>Q&A</h3>
-				<blockquote>“He who knows does not speak; <br>He who speaks does not know”</blockquote>
-				<p>Laozi, <em>Tao Te Ching</em></p>
 			</section>
 		</div>
 	</div>
@@ -175,6 +476,16 @@
 			// Learn about plugins: https://revealjs.com/plugins/
 			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
 		});
+	</script>
+
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+		integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" 
+		crossorigin="anonymous">
+	</script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" 
+		integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"
+		crossorigin="anonymous"
+		onload="renderMathInElement(document.body);">
 	</script>
 </body>
 
